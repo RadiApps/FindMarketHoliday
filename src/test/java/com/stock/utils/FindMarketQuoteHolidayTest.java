@@ -26,10 +26,10 @@ class FindMarketQuoteHolidayTest {
   void setUp() throws Exception {
     // data = read.readFile(""C:\\Users\\Radi\\Downloads\\EPAM-JULY.csv"); //incase we need to read
     // csv file outside the project
-    data = read.readFile(classloader.getResource("EPAM.csv").getPath());
+    data = read.readFile(classloader.getResource("EPAM-JULY-2022.csv").getPath());
   }
 
-  // @Test
+  @Test
   void testFindMarketHolidayJuly() {
     // expected missing dates from EPAM-JULY-2022.csv
     List<LocalDate> first = Arrays.asList(LocalDate.parse("2022-07-04"),
@@ -55,7 +55,7 @@ class FindMarketQuoteHolidayTest {
 
   }
 
-  @Test
+  // @Test
   void testFindMarketHolidayAll() {
     // expected missing dates from EPAM.csv
     List<LocalDate> first = Arrays.asList(LocalDate.parse("2021-11-25"),
