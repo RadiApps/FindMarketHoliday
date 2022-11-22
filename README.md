@@ -17,7 +17,7 @@ my condition are true which is after 5 iteration will find the end of week.
 
 ## Tools and technologies
 
-1. Java 1.8
+1. Maven & Java 1.8
 2. Lombok 1.18.12
 3. Junit jupiter 5.5.2
 4. CSV
