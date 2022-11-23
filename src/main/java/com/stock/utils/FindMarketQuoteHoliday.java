@@ -51,9 +51,11 @@ public class FindMarketQuoteHoliday {
               && !currentItemDate.plusDays(1).equals(data.get(i + 1).getDayDate())) {
         missingDates.add(currentItemDate.plusDays(1));
       }
+
     }
     return missingDates;
   }
+
   public List<LocalDate>  FindMarketHoliday2(List<StockQuote> data){
 
     Predicate<LocalDate> isWeekend = date -> date.getDayOfWeek() == DayOfWeek.SATURDAY

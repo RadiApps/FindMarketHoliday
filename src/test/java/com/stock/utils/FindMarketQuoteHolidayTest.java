@@ -47,6 +47,7 @@ class FindMarketQuoteHolidayTest {
 
   @Test
   void testFindMarketHolidayNov() {
+
     // expected missing dates from EPAM-NOV-2021.csv
     List<LocalDate> first = Arrays.asList(LocalDate.parse("2021-11-25"));
 
