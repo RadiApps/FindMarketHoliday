@@ -1,8 +1,13 @@
 package com.stock.utils;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import com.stock.model.StockQuote;
 
 public class FindMarketQuoteHoliday {
@@ -43,12 +48,33 @@ public class FindMarketQuoteHoliday {
       if (i + tempJump < data.size() && endWeek.equals(data.get(i + tempJump).getDayDate())) {
         i += tempJump;
       } else if (i < data.size() - 1
-          && !currentItemDate.plusDays(1).equals(data.get(i + 1).getDayDate())) {
+              && !currentItemDate.plusDays(1).equals(data.get(i + 1).getDayDate())) {
         missingDates.add(currentItemDate.plusDays(1));
       }
     }
-
     return missingDates;
   }
+  public List<LocalDate>  FindMarketHoliday2(List<StockQuote> data){
 
+    Predicate<LocalDate> isWeekend = date -> date.getDayOfWeek() == DayOfWeek.SATURDAY
+            || date.getDayOfWeek() == DayOfWeek.SUNDAY;
+
+    LocalDate startDate=data.get(0).getDayDate();
+    LocalDate endDate=data.get(data.size()-1).getDayDate();
+
+    List<LocalDate> allDataDates=data.stream().map(StockQuote::getDayDate).collect(Collectors.toList());
+
+    List<LocalDate> missingDays = startDate.datesUntil(endDate)
+            .filter(isWeekend.negate()).filter(d->!allDataDates.contains(d))
+            .collect(Collectors.toList());
+
+    return missingDays;
+  }
+  /*public static void main(String[] args){
+    ReadCSVFile read = new ReadCSVFile();
+    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+    String path=classloader.getResource("EPAM-JULY-2022.csv").getPath();
+    List<StockQuote> data = read.readFile(path);
+    FindMarketHoliday2(data);
+  }*/
 }
